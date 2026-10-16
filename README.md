@@ -1,1 +1,2 @@
-# Proyecto-Kodland-cambio-clim-tico
+# Proyecto-Kodland-cambio-climático
+El proyecto que espero hacer es una app que envíe notificaciones de recordatorios, consejos o alertas de cosas que esten pasando en torno al cambio climatico (como por ejemplo alertas de incendios, consejos de reciclaje o algo que genere conciencia en torno al tema) o lo hare con el bot de discord, incluso le podria añadir síntesis de voz, o que saque informacíon mediante una API (lo dudo)
