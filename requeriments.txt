@@ -1,1 +1,5 @@
-
+python v3.11.1
+discord.py v2.7.1
+beautifulsoup4-4.15.0
+deep-translator-1.11.4
+soupsieve-2.10
