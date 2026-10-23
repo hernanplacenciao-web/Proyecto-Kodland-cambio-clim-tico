@@ -1,0 +1,5 @@
+lista de comandos (se recomienda tener un canal con estas reglar para uso público)
+1-!recomendation = el bot dará una recomendación sobre acciones para contrarrestar el cambio climático
+2-!facts = el bot dará un dato sobre el cambio climático
+3-!evento_m = el bot dará datos sobre un evento que esté pasando en el mundo (no necesariamente por el cambio climático)
+4-!clima(ciudad) = el usuario debe cambiar la palabra ciudad por una ciudad y el bot daá el clima de esa ciudad
