@@ -70,12 +70,29 @@ async def facts(ctx):
                                             ]
     choice = random.choice(datos)
     await ctx.send(choice)
+def traducir_texto(texto: str) -> str:
+    """Traduce texto de inglés a español usando la API de MyMemory"""
+    if not texto or texto == "Sin descripción disponible.":
+        return texto
+    url = "https://api.mymemory.translated.net/get"
+    parametros = { "q": texto, "langpair": "en|es" }
+    try:
+        response = requests.get(url, params=parametros, timeout=10)
+        if response.status_code == 200:
+            datos = response.json()
+            # La traducción se encuentra en responseData -> translatedText
+            traduccion = datos.get("responseData", {}).get("translatedText")
+            if traduccion:
+                return traduccion
+    except Exception:
+        pass
+    # Si falla por cualquier motivo, devuelve el texto original sin tumbar el bot
+    return texto
 
 @bot.command()
 async def evento_m(ctx):
     def obtener_evento():
         url = "https://eonet.gsfc.nasa.gov/api/v3/events"
-
         parametros = {
             "status": "open",
             "limit": 100
@@ -91,12 +108,16 @@ async def evento_m(ctx):
 
         evento = random.choice(eventos)
 
-        nombre = evento["title"]
-        descripcion = evento.get("description") or "Sin descripción disponible."
+        nombre_en = evento["title"]
+        descripcion_en = evento.get("description") or "Sin descripción disponible."
         enlace = evento["link"]
 
-        return f"🌍 **{nombre}**\n{descripcion}\nMás información: {enlace}"
-    print("obtener_evento()")
+        # Traducimos usando MyMemory 
+        nombre_es = traducir_texto(nombre_en)
+        descripcion_es = traducir_texto(descripcion_en)
+
+        return f"🌍 **{nombre_es}**\n{descripcion_es}\n\nMás información: {enlace}"
+    print(obtener_evento())
 
 @bot.command() #intento (miserable) de implementar nueva funcion para obtener el clima de una ciudad
 async def clima(ctx, city: str):
@@ -108,6 +129,6 @@ async def clima(ctx, city: str):
             return response.text.strip()
         else:
             return "No se pudo obtener la información del clima. Por favor, inténtalo más tarde."
-    
+    await ctx.send(get_weather(city))
 
-bot.run("TOKEN")
+bot.run("YOUR_BOT_TOKEN")
